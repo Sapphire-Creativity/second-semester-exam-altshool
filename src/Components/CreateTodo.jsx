@@ -39,7 +39,7 @@ const CreateTodo = ({ closePopUp, addTask }) => {
 					className="w-full border p-2 mb-4 rounded-md"
 				/>
 			</div>
-			<div className="flex justify-between gap-4">
+			<div className="flex justify-between gap-4 my-5">
 				<button type="submit" className="medium-button">
 					Create
 				</button>

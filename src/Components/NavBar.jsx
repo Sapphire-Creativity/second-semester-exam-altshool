@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { LuSearch } from "react-icons/lu";
 const NavBar = () => {
 	return (
-		<div className="flex items-center justify-between w-full px-14 py-7 shadow-softGlow ">
+		<div className="flex items-center justify-between w-full p-5 sm:px-14 py-7 shadow-softGlow ">
 			<div>
 				<h3 className="font-semibold text-dark text-xl cursor-pointer">
 					Dev.Sa
@@ -19,12 +19,12 @@ const NavBar = () => {
 				</NavLink>
 			</ul>
 
-			<div className="flex items-center gap-4 bg-slate-50 py-2 px-5 rounded-full">
+			<div className="flex items-center gap-4 bg-slate-200 py-2 px-5 rounded-full">
 				<LuSearch className="text-primary text-xl" />
 				<input
 					type="text"
 					placeholder="Search Todos..."
-					className=" bg-slate-50 border-none outline-none p-2"
+					className=" bg-transparent border-none outline-none p-2"
 				/>
 			</div>
 		</div>

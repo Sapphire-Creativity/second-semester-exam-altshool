@@ -4,6 +4,7 @@ import { MdEdit } from "react-icons/md";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import CreateTodo from "../Components/CreateTodo";
+import EditTodo from "../Components/EditTodo";
 
 const Home = () => {
 	const [tasks, setTasks] = useState([]);
@@ -12,6 +13,9 @@ const Home = () => {
 	const [currentTask, setCurrentTask] = useState(null);
 	const [isCreatePopupOpen, setIsCreatePopupOpen] = useState(false);
 	const navigate = useNavigate();
+
+	//
+	// Fetch todos from API
 
 	useEffect(() => {
 		fetchTodos(page);
@@ -28,10 +32,14 @@ const Home = () => {
 		}
 	};
 
+	// Function to add task
+
 	const addTask = (newTask) => {
 		setTasks((prevTasks) => [newTask, ...prevTasks]); // Add new task at the top
 		setIsCreatePopupOpen(false);
 	};
+
+	// Function to edit task
 
 	const editTask = (id, updatedTask) => {
 		setTasks((prevTasks) =>
@@ -42,14 +50,20 @@ const Home = () => {
 		closeModal();
 	};
 
+	// Function to delete task
+
 	const deleteTask = (id) => {
 		setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
 	};
+
+	// Function to open modal
 
 	const openModal = (task) => {
 		setCurrentTask(task);
 		setIsModalOpen(true);
 	};
+
+	// Function to close modal
 
 	const closeModal = () => {
 		setCurrentTask(null);
@@ -72,12 +86,16 @@ const Home = () => {
 				TODO LISTS
 			</h1>
 
+			{/* Create Todo Button */}
+
 			<button
 				onClick={() => setIsCreatePopupOpen(true)}
-				className="btn-primary mx-auto block mb-10"
+				className="btn-small mx-auto block mb-10 sm:w-[20rem]"
 			>
 				Create Todo
 			</button>
+
+			{/* Task Items List */}
 
 			<div className="max-w-5xl mx-auto py-8">
 				<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -95,7 +113,8 @@ const Home = () => {
 									<button
 										className="small-button  flex items-center gap-2"
 										onClick={(e) => {
-											// e.stopPropagation();
+											e.preventDefault();
+											e.stopPropagation();
 											openModal(item);
 										}}
 									>
@@ -104,7 +123,8 @@ const Home = () => {
 									<button
 										className="small-button flex items-center gap-2"
 										onClick={(e) => {
-											// e.stopPropagation();
+											e.preventDefault();
+											e.stopPropagation();
 											deleteTask(item.id);
 										}}
 									>
@@ -116,56 +136,33 @@ const Home = () => {
 					))}
 				</div>
 
-				{/* PAGINATION */}
-				<div className="mt-8 flex justify-center gap-4">
+				{/* Pagination Component */}
+				<div className="mt-20 flex justify-center gap-5">
 					<button
 						onClick={() => handlePageChange("prev")}
-						className="small-button"
+						className="medium-button"
 						disabled={page === 1}
 					>
 						Previous
 					</button>
 					<button
 						onClick={() => handlePageChange("next")}
-						className="small-button"
+						className="medium-button"
 					>
 						Next
 					</button>
 				</div>
 
-				{/* Edit todo modal */}
-				{isModalOpen && (
-					<div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
-						<div className="bg-white p-6 rounded-lg max-w-md w-full">
-							<h2 className="text-xl font-bold mb-4">Edit Task</h2>
-							<input
-								type="text"
-								name="title"
-								value={currentTask?.title || ""}
-								onChange={(e) =>
-									setCurrentTask({
-										...currentTask,
-										title: e.target.value,
-									})
-								}
-								className="w-full border p-2 mb-4 rounded-md"
-							/>
-							<div className="flex justify-end space-x-2">
-								<button onClick={closeModal} className="small-button">
-									Cancel
-								</button>
-								<button
-									onClick={() => editTask(currentTask.id, currentTask)}
-									className="small-button"
-								>
-									Save
-								</button>
-							</div>
-						</div>
-					</div>
-				)}
+				{/* Edit Todo Component */}
 
-				{/* Create todo modal */}
+				<EditTodo
+					isOpen={isModalOpen}
+					currentTask={currentTask}
+					setCurrentTask={setCurrentTask}
+					closeModal={closeModal}
+					editTask={editTask}
+				/>
+				{/* Create Todo Component */}
 				{isCreatePopupOpen && (
 					<div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
 						<CreateTodo

@@ -12,9 +12,9 @@ const TodoDetails = () => {
 
 	return (
 		<div className="container">
-			<h1 className="my-10 text-4xl"> TASK ID: {id}</h1>
+			<h1 className="my-10 text-4xl "> TASK ID: {id}</h1>
 
-			<div className="boxstyle">
+			<div className="boxstyle lg:max-w-[40rem] m-auto">
 				<div>
 					<span className="bg-blue-500 text-xs px-4 py-2 text-white rounded-full ">
 						UserID: {todoDetailsdata.userId}
