@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	font-weight: 500;
+	text-decoration: none;
+}
+
+body {
+	font-family: "Work Sans", sans-serif;
+	background: #fafaff;
+}
+
+.container {
+	padding: 5rem;
+	width: 100%;
+	margin: auto;
+}
+
+h1 {
+	font-size: 3rem;
+	line-height: 1.1;
+	font-weight: 700;
+	text-align: center;
+}
+
+a.active {
+	color: #1d1dff;
+}
+
+button {
+	border-radius: 100px;
+	border: 1px solid transparent;
+	padding: 1em 1.8em;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	background: #1d1dff;
+	color: #fafaff;
+	cursor: pointer;
+	transition: ease 0.35s;
+	box-shadow: 0 20px 30px rgba(0, 110, 255, 0.441);
+}
+button:hover {
+	background: #000082;
+}
+.boxstyle {
+	padding: 2rem;
+	border-radius: 20px;
+	box-shadow: 0 15px 30px rgba(21, 0, 255, 0.275);
+	cursor: pointer;
+	transition: ease-in 0.8s;
+}
+
+.boxstyle:hover {
+	transform: scale(1.1);
+}
+
+.small-button {
+	padding: 0.4rem 1rem;
+	font-size: .8rem;
+}
+.medium-button {
+	padding: 0.6rem 2rem;
+	font-size: .8rem;
+}
+@media screen and (max-width: 1000px) {
+	.container {
+		padding: 5rem 2rem;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.container {
+		padding: 5rem 1rem;
+	}
+}
