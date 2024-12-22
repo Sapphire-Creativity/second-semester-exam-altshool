@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { LuSearch } from "react-icons/lu";
+
 const NavBar = () => {
 	return (
 		<div className="flex items-center justify-between w-full p-5 sm:px-14 py-7 shadow-softGlow ">
@@ -17,16 +17,10 @@ const NavBar = () => {
 				<NavLink to="errorboundary" className="text-gray-950">
 					<li>Error</li>
 				</NavLink>
+				<NavLink to="404Page" className="text-gray-950">
+					<li>404</li>
+				</NavLink>
 			</ul>
-
-			<div className="flex items-center gap-4 bg-slate-200 py-2 px-5 rounded-full">
-				<LuSearch className="text-primary text-xl" />
-				<input
-					type="text"
-					placeholder="Search Todos..."
-					className=" bg-transparent border-none outline-none p-2"
-				/>
-			</div>
 		</div>
 	);
 };

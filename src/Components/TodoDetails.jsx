@@ -3,28 +3,23 @@ import { useLoaderData, useParams } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 const TodoDetails = () => {
-	//To use the loader data
-	//
-	// const { title, id, completed } = todoDetailsdata;
-
 	const { id } = useParams();
 	const todoDetailsdata = useLoaderData();
 
 	return (
 		<div className="container">
-			<h1 className="my-10 text-4xl "> TASK ID: {id}</h1>
-
+			<h1 className="my-10 text-4xl">TASK ID: {id}</h1>
 			<div className="boxstyle lg:max-w-[40rem] m-auto">
 				<div>
-					<span className="bg-blue-500 text-xs px-4 py-2 text-white rounded-full ">
-						UserID: {todoDetailsdata.userId}
+					<span className="bg-blue-500 text-xs px-4 py-2 text-white rounded-full">
+						UserID: {todoDetailsdata?.userId || "Unknown"}
 					</span>
 					<h4 className="text-center text-base font-medium text-gray-700 my-4">
-						{todoDetailsdata.title}
+						{todoDetailsdata?.title || "No Title Available"}
 					</h4>
 					<div className="flex items-center justify-center text-center">
-						{todoDetailsdata.completed ? (
-							<span className="flex items-center justify-center gap-2  bg-green-500 text-white text-sm py-2 px-4 rounded-full mt-4">
+						{todoDetailsdata?.completed ? (
+							<span className="flex items-center justify-center gap-2 bg-green-500 text-white text-sm py-2 px-4 rounded-full mt-4">
 								<FaCheckCircle /> Task Completed
 							</span>
 						) : (

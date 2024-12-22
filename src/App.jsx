@@ -49,7 +49,14 @@ const App = () => {
 					loader={todoDetailsLoader}
 				/>
 
-				<Route path="*" element={<NotFound />} />
+				<Route
+					path="404Page"
+					element={
+						<Suspense fallback={<Loader />}>
+							<NotFound />
+						</Suspense>
+					}
+				/>
 			</Route>
 		)
 	);
