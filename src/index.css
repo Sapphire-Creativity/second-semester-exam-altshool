@@ -21,7 +21,7 @@ body {
 }
 
 .container {
-	padding: 5rem;
+	padding: 5rem 2rem;
 	width: 100%;
 	margin: auto;
 }
@@ -67,11 +67,11 @@ button:hover {
 
 .small-button {
 	padding: 0.4rem 1rem;
-	font-size: .8rem;
+	font-size: 0.8rem;
 }
 .medium-button {
 	padding: 0.6rem 2rem;
-	font-size: .8rem;
+	font-size: 0.8rem;
 }
 @media screen and (max-width: 1000px) {
 	.container {

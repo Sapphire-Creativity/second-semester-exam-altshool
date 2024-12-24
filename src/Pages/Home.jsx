@@ -17,11 +17,7 @@ const Home = () => {
 	const [isCreatePopupOpen, setIsCreatePopupOpen] = useState(false);
 	const navigate = useNavigate();
 
-	//
-
-	//
 	// Fetch todos from API
-
 	useEffect(() => {
 		fetchTodos(page);
 	}, [page]);
@@ -37,15 +33,13 @@ const Home = () => {
 		}
 	};
 
-	// Function to add task
-
+	// Add task
 	const addTask = (newTask) => {
 		setTasks((prevTasks) => [newTask, ...prevTasks]); // Add new task at the top
 		setIsCreatePopupOpen(false);
 	};
 
-	// Function to edit task
-
+	// Edit task
 	const editTask = (id, updatedTask) => {
 		setTasks((prevTasks) =>
 			prevTasks.map((task) =>
@@ -55,20 +49,16 @@ const Home = () => {
 		closeModal();
 	};
 
-	// Function to delete task
-
+	// Delete task
 	const deleteTask = (id) => {
 		setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
 	};
 
-	// Function to open modal
-
+	// Open and close modal
 	const openModal = (task) => {
 		setCurrentTask(task);
 		setIsModalOpen(true);
 	};
-
-	// Function to close modal
 
 	const closeModal = () => {
 		setCurrentTask(null);
@@ -81,16 +71,11 @@ const Home = () => {
 		);
 	};
 
-	const handleTaskClick = (id) => {
-		navigate(`/${id}`); // Navigate to TodoDetails with task ID
-	};
-
-	//
-
 	const handleFilterChange = (filterOption) => {
 		setFilter(filterOption);
 	};
 
+	// Filter tasks
 	const filteredTasks = tasks.filter((task) => {
 		if (filter === "completed") return task.completed;
 		if (filter === "notCompleted") return !task.completed;
@@ -104,7 +89,6 @@ const Home = () => {
 			</h1>
 
 			{/* Create Todo Button */}
-
 			<button
 				onClick={() => setIsCreatePopupOpen(true)}
 				className="btn-small mx-auto block mb-10 sm:w-[20rem]"
@@ -112,138 +96,98 @@ const Home = () => {
 				Create Todo
 			</button>
 
-			{/*  */}
-			<div className="">
-				{/* Search component */}
-
+			{/* Search and Filter */}
+			<div className="mb-4">
 				<div className="flex items-center gap-4 bg-slate-200 py-2 px-5 rounded-full">
 					<LuSearch className="text-primary text-xl" />
 					<input
 						type="text"
 						placeholder="Search Todos..."
-						className=" bg-transparent border-none outline-none p-2"
+						className="bg-transparent border-none outline-none p-2"
 					/>
 				</div>
-
-				{/* Filter component */}
 				<div className="my-4">
 					<SelectFilter
 						selectedFilter={filter}
 						onFilterChange={handleFilterChange}
 					/>
 				</div>
-				<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-					{filteredTasks.map((item) => (
-						<Link
-							to={item.id.toString()}
-							key={item.id}
-							className="boxstyle cursor-pointer"
-						>
-							<h4 className="text-center text-base font-medium text-gray-700">
-								{item.title}
-							</h4>
-							<div className="flex justify-between mt-6 items-center">
-								<div className="flex items-center justify-center gap-5 m-auto">
-									<button
-										className="small-button  flex items-center gap-2"
-										onClick={(e) => {
-											openModal(item);
-										}}
-									>
-										Edit <MdEdit />
-									</button>
-									<button
-										className="small-button flex items-center gap-2"
-										onClick={(e) => {
-											deleteTask(item.id);
-										}}
-									>
-										Delete <RiDeleteBin6Fill />
-									</button>
-								</div>
-							</div>
-						</Link>
-					))}
-				</div>
 			</div>
 
-			{/* Task Items List */}
-
-			<div className="max-w-5xl mx-auto mt-5 py-8">
-				<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-					{tasks.map((item) => (
-						<Link
-							to={item.id.toString()}
-							key={item.id}
-							className="boxstyle cursor-pointer"
-						>
-							<h4 className="text-center text-base font-medium text-gray-700">
-								{item.title}
-							</h4>
-							<div className="flex justify-between mt-6 items-center">
-								<div className="flex items-center justify-center gap-5 m-auto">
-									<button
-										className="small-button  flex items-center gap-2"
-										onClick={(e) => {
-											e.preventDefault();
-											e.stopPropagation();
-											openModal(item);
-										}}
-									>
-										Edit <MdEdit />
-									</button>
-									<button
-										className="small-button flex items-center gap-2"
-										onClick={(e) => {
-											e.preventDefault();
-											e.stopPropagation();
-											deleteTask(item.id);
-										}}
-									>
-										Delete <RiDeleteBin6Fill />
-									</button>
-								</div>
+			{/* Task Items */}
+			<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+				{filteredTasks.map((item) => (
+					<Link
+						to={item.id.toString()}
+						key={item.id}
+						className="boxstyle cursor-pointer"
+					>
+						<h4 className="text-center text-base font-medium text-gray-700">
+							{item.title}
+						</h4>
+						<div className="flex justify-between mt-6 items-center">
+							<div className="flex items-center justify-center gap-5 m-auto">
+								<button
+									className="small-button flex items-center gap-2"
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										openModal(item);
+									}}
+								>
+									Edit <MdEdit />
+								</button>
+								<button
+									className="small-button flex items-center gap-2"
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										deleteTask(item.id);
+									}}
+								>
+									Delete <RiDeleteBin6Fill />
+								</button>
 							</div>
-						</Link>
-					))}
-				</div>
-
-				{/* Pagination Component */}
-				<div className="mt-20 flex justify-center gap-5">
-					<button
-						onClick={() => handlePageChange("prev")}
-						className="medium-button"
-						disabled={page === 1}
-					>
-						Previous
-					</button>
-					<button
-						onClick={() => handlePageChange("next")}
-						className="medium-button"
-					>
-						Next
-					</button>
-				</div>
-
-				{/* Edit Todo Component */}
-
-				<EditTodo
-					isOpen={isModalOpen}
-					currentTask={currentTask}
-					setCurrentTask={setCurrentTask}
-					closeModal={closeModal}
-					editTask={editTask}
-				/>
-				{/* Create Todo Component */}
-				{isCreatePopupOpen && (
-					<div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
-						<CreateTodo
-							closePopUp={() => setIsCreatePopupOpen(false)}
-							addTask={addTask}
-						/>
-					</div>
-				)}
+						</div>
+					</Link>
+				))}
 			</div>
+
+			{/* Pagination */}
+			<div className="mt-20 flex justify-center gap-5">
+				<button
+					onClick={() => handlePageChange("prev")}
+					className="medium-button"
+					disabled={page === 1}
+				>
+					Previous
+				</button>
+				<button
+					onClick={() => handlePageChange("next")}
+					className="medium-button"
+				>
+					Next
+				</button>
+			</div>
+
+			{/* Edit Todo Component */}
+			<EditTodo
+				isOpen={isModalOpen}
+				currentTask={currentTask}
+				setCurrentTask={setCurrentTask}
+				closeModal={closeModal}
+				editTask={editTask}
+			/>
+
+			{/* Create Todo Component */}
+			{isCreatePopupOpen && (
+				<div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+					<CreateTodo
+						closePopUp={() => setIsCreatePopupOpen(false)}
+						addTask={addTask}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };
